@@ -1,5 +1,21 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import React from 'react'
+import { Formik, Form, Field } from 'formik';
+import React from 'react';
+import * as yup from 'yup';
+
+const FormSchema = yup.object().shape({
+    email: yup
+        .string()
+        .email('Invalid email address')
+        .required('Email is required'),
+    password: yup
+        .string()
+        .required('Password is required')
+        .min(8, 'Password must be atleast 8 characters long')
+        .matches(/[0-9]/, 'Password requires a number')
+        .matches(/[a-z]/, 'Password requires a lowercase letter')
+        .matches(/[A-Z]/, 'Password requires an uppercase letter')
+        .matches(/[^\w]/, 'Password requires a symbol')
+});
 
 export default function Login() {
     return (
@@ -7,37 +23,30 @@ export default function Login() {
             <h1 className='header'>Login</h1>
             <Formik
                 initialValues={{ email: '', password: '' }}
-                validate={values => {
-                    const errors = {};
-                    if (!values.email) {
-                        errors.email = 'Required';
-                    } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                    ) {
-                        errors.email = 'Invalid email address';
-                    }
-                    return errors;
-                }}
+                validationSchema={FormSchema}
                 onSubmit={(values, { setSubmitting }) => {
                     setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
                         setSubmitting(false);
                     }, 400);
                 }}
             >
-                {({ isSubmitting }) => (
+                {({ isSubmitting, errors, touched }) => (
                     <Form>
                         <div className='input'>
                             <label htmlFor="email" className='label'>Email <span className='required'>*</span> </label>
                             <Field type="email" name="email" className="input-field" placeholder="Email" />
-                            <ErrorMessage name="email" component="div" className='error' />
+                            {touched.email && errors.email && (
+                                <div className='error'>{errors.email}</div>
+                            )}
                         </div>
                         <div className='input'>
                             <label htmlFor="password" className='label'>Password <span className='required'>*</span> </label>
                             <Field type="password" name="password" className="input-field" placeholder="Password" />
-                            <ErrorMessage name="password" component="div" />
+                            {touched.password && errors.password && (
+                                <div className='error'>{errors.password}</div>
+                            )}
                         </div>
-                        <button type="submit" disabled={isSubmitting} className='button'>
+                        <button type="submit" disabled={isSubmitting} className='button' style={{ opacity: errors.email || errors.password ? 0.5 : 1 }}>
                             Login
                         </button>
                     </Form>
