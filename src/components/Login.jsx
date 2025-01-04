@@ -1,5 +1,6 @@
 import { Formik, Form, Field } from 'formik';
 import React from 'react';
+import { useNavigate } from 'react-router';
 import * as yup from 'yup';
 
 const FormSchema = yup.object().shape({
@@ -18,6 +19,7 @@ const FormSchema = yup.object().shape({
 });
 
 export default function Login() {
+    const navigate = useNavigate();
     return (
         <div className='form'>
             <h1 className='header'>Login</h1>
@@ -25,9 +27,9 @@ export default function Login() {
                 initialValues={{ email: '', password: '' }}
                 validationSchema={FormSchema}
                 onSubmit={(values, { setSubmitting }) => {
-                    setTimeout(() => {
-                        setSubmitting(false);
-                    }, 400);
+                    localStorage.setItem("email", JSON.stringify(values.email));
+                    navigate("/home");
+                    setSubmitting(false);
                 }}
             >
                 {({ isSubmitting, errors, touched }) => (
