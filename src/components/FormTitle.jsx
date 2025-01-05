@@ -4,7 +4,7 @@ function FormTitle({ icon, title }) {
     return (
         <div className='form-title'>
             <div className='form-img'>
-                <img src={icon} alt="image" />
+                <img src={icon} alt="HeaderIcon" />
             </div>
             <p className='form-header'>{title}</p>
         </div>

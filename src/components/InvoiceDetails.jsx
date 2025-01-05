@@ -1,6 +1,5 @@
 import React from 'react'
 import invoiceIcon from '../assets/invoice.png';
-import dateIcon from '../assets/date.png';
 import { Field } from 'formik';
 import FormTitle from './FormTitle';
 import { PURCHASE_ORDER_NUMBERS, VENDOR_OPTIONS } from '../constants/data';

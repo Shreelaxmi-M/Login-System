@@ -12,20 +12,20 @@ function App() {
     const email = localStorage.getItem("email");
     setIsAuthenticated(email);
   }, [navigate])
+
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Navigate to={"/login"} />} />
-        <Route
-          path="/login"
-          element={isAuthenticated ? <Navigate to='/home' /> : <Login />}
-        />
-        <Route
-          path="/home"
-          element={isAuthenticated ? <Home /> : <Navigate to='/login' />}
-        />
-
-      </Routes>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route
+            path="/login"
+            element={isAuthenticated ? <Navigate to="/home" /> : <Login />}
+          />
+          <Route
+            path="/home"
+            element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
+          />
+        </Routes>
     </div>
   );
 }

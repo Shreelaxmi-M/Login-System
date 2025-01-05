@@ -17,7 +17,7 @@ function UploadInvoice() {
             <div className='upload-body'>
                 <p className='upload-body-title'>Upload your Invoice</p>
                 <p className='upload-body-subtitle'>To auto-populate fields and save time</p>
-                <img src={uploadImage} alt="Image" width={200} height={200} />
+                <img src={uploadImage} alt="UploadImage" width={200} height={200} />
                 <button className='upload-button'>Upload File</button>
                 <div>
                     <button className='upload-btn'>click to upload</button>
