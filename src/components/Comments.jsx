@@ -11,7 +11,7 @@ function Comments({ touched, errors }) {
             <div className='input'>
                 <div className='input-comment'>
                     <Field type="text" name="comment" className="input-field-comment" placeholder="Add a comment and use @Name to tag someone" />
-                    <img src={sendIcon} alt="image" />
+                    <img src={sendIcon} alt="CommentHeaderIcon" />
                 </div>
                 {touched.comment && errors.comment && (
                     <div className='error'>{errors.comment}</div>
